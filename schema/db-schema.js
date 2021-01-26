@@ -4,7 +4,6 @@ const MongoClient = require("mongodb").MongoClient;
 const { GraphQLObjectType, GraphQLString, GraphQLSchema } = graphql;
 
 const dbUri = `mongodb+srv://bhakt:${process.env.VIVEK_MONGODB_KRISHNA_BHAGAVAD_GITA_BHAKT_PASSWORD}@bhagavad-gita.kcosh.mongodb.net/<dbname>?retryWrites=true&w=majority`;
-//const client = new MongoClient(dbUri, { useNewUrlParser: true });
 
 const ShlokaTranslatedType = new GraphQLObjectType({
   name: "ShlokaTranslated",
