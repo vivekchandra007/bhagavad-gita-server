@@ -28,8 +28,22 @@ const ShlokaType = new GraphQLObjectType({
   name: "Shloka",
   fields: () => ({
     _id: { type: GraphQLString },
-    language_id: { type: GraphQLString },
-    shloka_core_id: { type: GraphQLString },
+    language: {
+      type: LanguageType,
+      resolve(parent, args) {
+        return findOneInCollectionByQuery(DB.GITA.COLLECTIONS.LANGUAGES, {
+          _id: parent.language_id,
+        });
+      },
+    },
+    shloka_core: {
+      type: ShlokaCoreType,
+      resolve(parent, args) {
+        return findOneInCollectionByQuery(DB.GITA.COLLECTIONS.SHLOKAS_CORE, {
+          _id: parent.shloka_core_id,
+        });
+      },
+    },
     text: { type: GraphQLString },
     word_by_word_translation: { type: GraphQLString },
     translation: { type: GraphQLString },
@@ -41,12 +55,37 @@ const ShlokaCoreType = new GraphQLObjectType({
   name: "Shloka_Core",
   fields: () => ({
     _id: { type: GraphQLString },
-    chapter_id: { type: GraphQLString },
+    chapter: {
+      type: ChapterType,
+      resolve(parent, args) {
+        return findOneInCollectionByQuery(DB.GITA.COLLECTIONS.CHAPTERS, {
+          _id: parseInt(parent.chapter_id),
+        });
+      },
+    },
     shloka: { type: GraphQLString },
     image: { type: GraphQLString },
-    speaker_id: { type: GraphQLString },
+    speaker: {
+      type: SpeakerType,
+      resolve(parent, args) {
+        return findOneInCollectionByQuery(DB.GITA.COLLECTIONS.SPEAKERS, {
+          _id: parseInt(parent.speaker_id),
+        });
+      },
+    },
     original_text: { type: GraphQLString },
-    tags: { type: GraphQLList(GraphQLString) },
+    tags: { 
+      type: GraphQLList(TagType),
+      resolve(parent, args) {
+        let result = [];
+        parent.tags.forEach(tag => {
+          result.push(findOneInCollectionByQuery(DB.GITA.COLLECTIONS.TAGS, {
+            _id: tag,
+          }))
+        });
+        return result;
+      } 
+    },
   }),
 });
 
