@@ -6,14 +6,14 @@ module.exports = (req, res, next) => {
   if (req._parsedUrl.pathname === "/auth/oauth/v1/token") {
     // requesting token
     //if (req.method === "POST" && req.secure) {
-      console.log(req.socket);
-    if (req.socket.encrypted) {
+      console.log(req.headers.referer.split(':')[0]);
+    if (req.headers.referer.split(':')[0] === "https") {
       next();
     } else {
       res.status(401).json({
         message:
           "Only through POST request over HTTPS can an Access Token be generated." +
-          req.socket,
+          req.headers.referer.split(':')[0],
       });
     }
   } else {
