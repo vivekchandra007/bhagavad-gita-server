@@ -6,6 +6,7 @@ module.exports = (req, res, next) => {
   if (req._parsedUrl.pathname === "/auth/oauth/v1/token") {
     // requesting token
     //if (req.method === "POST" && req.secure) {
+      console.log(req.connection);
     if (req.connection.encrypted) {
       next();
     } else {
