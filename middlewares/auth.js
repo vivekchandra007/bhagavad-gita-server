@@ -11,7 +11,8 @@ module.exports = (req, res, next) => {
     } else {
       res.status(401).json({
         message:
-          "Only through POST request over HTTPS can an Access Token be generated.",
+          "Only through POST request over HTTPS can an Access Token be generated." +
+          req.protocol,
       });
     }
   } else {
