@@ -5,8 +5,7 @@ const SECRET = process.env.VIVEK_BHAGAVAD_GITA_SERVER_SECRET;
 module.exports = (req, res, next) => {
   if (req._parsedUrl.pathname === "/auth/oauth/v1/token") {
     // requesting token
-    //if (req.method === "POST" && req.secure) {
-    //console.log(req.protocol);
+    //if (req.method === "POST" && req.protocol == "https") {
     if (req.protocol == "https") {
       next();
     } else {
