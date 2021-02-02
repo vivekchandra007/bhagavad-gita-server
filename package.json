@@ -2,10 +2,10 @@
   "name": "bhagavad-gita-server",
   "version": "1.0.0",
   "description": "A NodeJS server app that exposes public APIs, GraphQL as well as REST accessing the organised Bhagvad Gita content, available in multiple languages.",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
