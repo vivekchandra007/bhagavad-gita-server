@@ -7,15 +7,15 @@ module.exports = (req, res, next) => {
     // requesting token
     //if (req.method === "POST" && req.secure) {
       console.log(req.socket);
-      if (req.socket.encrypted) {
-        next();
-      } else {
-        res.status(401).json({
-          message:
-            "Only through POST request over HTTPS can an Access Token be generated." +
-            req.socket,
-        });
-      }
+    if (req.socket.encrypted) {
+      next();
+    } else {
+      res.status(401).json({
+        message:
+          "Only through POST request over HTTPS can an Access Token be generated." +
+          req.socket,
+      });
+    }
   } else {
     // must have token, so verify and only then proceed, else not authorized
     try {
