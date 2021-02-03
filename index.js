@@ -16,12 +16,16 @@ app.get("/auth/oauth/v1/token/", (req, res) => {
 });
 
 app.use(
-  "/graphql/v1",
+  "/api/graphql/v1",
   graphqlHTTP({
     schema: dbSchema,
     graphiql: true,
   })
 );
+
+app.get("/api/rest/v1", (req, res) => {
+  res.status(200).json({ message: "This API works." });
+});
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Hare Krishna !!!" });
