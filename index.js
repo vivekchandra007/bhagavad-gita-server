@@ -15,6 +15,13 @@ app.get("/auth/oauth/v1/token/", (req, res) => {
   });
 });
 
+app.post("/auth/oauth/v1/token", (req, res) => {
+  res.status(200).json({
+    token:
+      "HareKrishnaHareKrishnaKrishnaKrishnaHareHareHareRamHareRamRamRamHareHare",
+  });
+});
+
 app.use(
   "/api/graphql/v1",
   graphqlHTTP({
