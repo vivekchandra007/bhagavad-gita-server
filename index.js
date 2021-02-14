@@ -6,7 +6,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // No access without a valid access token (one received after calling calling /oauth2/v1/ route)
-//app.use(require("./middlewares/auth"));
+app.use(require("./middlewares/auth"));
 
 app.get("/auth/oauth/v1/token/", (req, res) => {
   res.status(200).json({
@@ -24,7 +24,10 @@ app.use(
 );
 
 app.get("/api/rest/v1", (req, res) => {
-  res.status(200).json({ message: "This API works." });
+  res.status(200).json({
+    message:
+      "This REST API works but we recommend using GraphQL one via /api/graphql/v1",
+  });
 });
 
 app.get("/", (req, res) => {
