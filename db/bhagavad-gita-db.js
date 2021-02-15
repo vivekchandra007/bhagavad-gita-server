@@ -9,6 +9,7 @@ const COLLECTIONS = {
   SPEAKERS: "speakers",
   LANGUAGES: "languages",
   TAGS: "tags",
+  CLIENTS: "clients",
 };
 
 async function findInCollectionByQuery(collectionName, query, nonUnique) {

@@ -1,30 +1,35 @@
 const jwt = require("jsonwebtoken");
 
-const SECRET = process.env.VIVEK_BHAGAVAD_GITA_SERVER_SECRET;
+const constants = require("../common/constants");
+const messages = require("../common/messages");
+
+const tokenFactory = require("../security/token-factory");
 
 module.exports = (req, res, next) => {
   if (req._parsedUrl.pathname === "/auth/oauth/v1/token") {
     // requesting token (through POST and https access only)
     if (
-      req.headers["host"] === "localhost:3000" ||
+      req.headers["host"] === `localhost:${constants.LOCALHOST_PORT}` ||
       (req.method === "POST" && req.headers["x-forwarded-proto"] == "https")
     ) {
       next();
     } else {
       res.status(401).json({
-        message:
-          "Only through POST request over HTTPS can an Access Token be generated.",
+        message: messages.TOKEN_GEN_ACCESS_ERRROR,
       });
     }
   } else {
     // must have token, so verify and only then proceed, else not authorized
     try {
       const token = req.headers.authorization.split(" ")[1];
-      jwt.verify(token, SECRET);
-      req.token = token;
-      next();
+      if (tokenFactory.verifyToken(token)) {
+        req.token = token;
+        next();
+      } else {
+        res.status(401).json({ message: messages.TOKEN_NOT_AUTHORIZED });
+      }
     } catch (error) {
-      res.status(401).json({ message: "Not Authorized to access this." });
+      res.status(401).json({ message: messages.TOKEN_NOT_AUTHORIZED });
     }
   }
 };
