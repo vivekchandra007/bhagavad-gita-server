@@ -28,10 +28,10 @@ getDirectories("*[!node_modules]", function (err, res) {
 
 // first compile sass file to a css one
 // const scssData = fs.readFileSync(join(__dirname, "scss", "index.scss"), "utf8");
-// const compiledCSS = sass.renderSync({
-//   data: scssData,
-// });
-// fs.writeFileSync("./public/styles/index.css", compiledCSS.css);
+const compiledCSS = sass.renderSync({
+  file: join(__dirname, "scss", "index.scss"),
+});
+fs.writeFileSync("./public/styles/index.css", compiledCSS.css);
 
 const app = express();
 const port = process.env.PORT || constants.LOCALHOST_PORT;
