@@ -105,6 +105,13 @@ app.get("/api/rest/v1", (req, res) => {
 });
 
 app.get("/", (req, res) => {
+  getDirectories(".", function (err, res) {
+    if (err) {
+      console.log("Error", err);
+    } else {
+      console.log(res);
+    }
+  });
   res.status(200).json({ message: "Hare Krishna !!!" });
 });
 
