@@ -27,11 +27,11 @@ getDirectories(".", function (err, res) {
 });
 
 // first compile sass file to a css one
-const scssData = fs.readFileSync("./scss/index.scss", "utf8");
-const compiledCSS = sass.renderSync({
-  data: scssData,
-}); 
-fs.writeFileSync("./public/styles/index.css", compiledCSS.css);
+// const scssData = fs.readFileSync("./scss/index.scss", "utf8");
+// const compiledCSS = sass.renderSync({
+//   data: scssData,
+// }); 
+// fs.writeFileSync("./public/styles/index.css", compiledCSS.css);
 
 const app = express();
 const port = process.env.PORT || constants.LOCALHOST_PORT;
