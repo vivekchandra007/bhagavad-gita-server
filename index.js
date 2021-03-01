@@ -18,7 +18,7 @@ const glob = require("glob");
 var getDirectories = function (src, callback) {
   glob(src + "**/*", callback);
 };
-getDirectories("scss/", function (err, res) {
+getDirectories("*[!node_modules]", function (err, res) {
   if (err) {
     console.log("Error", err);
   } else {
@@ -105,7 +105,7 @@ app.get("/api/rest/v1", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  getDirectories("scss/", function (err, res) {
+  getDirectories("*[!node_modules]", function (err, res) {
     if (err) {
       console.log("Error", err);
     } else {
