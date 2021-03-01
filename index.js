@@ -12,13 +12,6 @@ const tokenFactory = require("./security/token-factory");
 
 const bhagavadGitaDB = require("./db/bhagavad-gita-db");
 
-// first compile sass file to a css one
-fs.readFile("./scss/index.scss", "utf-8", (err, data) => {
-  const compiledCSS = sass.renderSync({
-    data: data,
-  });
-  fs.writeFileSync("./public/styles/index.css", compiledCSS.css);
-});
 fs.readFile("./public/index.html", (err, data) => {
   //do nothing;
 });
@@ -27,6 +20,14 @@ fs.readFile("./public/scripts/index.js", (err, data) => {
 });
 fs.readFile("./public/styles/index.css", (err, data) => {
   //do nothing;
+});
+
+// first compile sass file to a css one
+fs.readFile("./scss/index.scss", "utf-8", (err, data) => {
+  const compiledCSS = sass.renderSync({
+    data: data,
+  });
+  fs.writeFileSync("./public/styles/index.css", compiledCSS.css);
 });
 
 const app = express();
