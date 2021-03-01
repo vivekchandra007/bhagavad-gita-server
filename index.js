@@ -19,6 +19,9 @@ fs.readFile("./scss/index.scss", "utf-8", (err, data) => {
   });
   fs.writeFileSync("./public/styles/index.css", compiledCSS.css);
 });
+fs.readFile("./public/index.html");
+fs.readFile("./public/scripts/index.js");
+fs.readFile("./public/styles/index.css");
 
 const app = express();
 const port = process.env.PORT || constants.LOCALHOST_PORT;
@@ -92,7 +95,7 @@ app.get("/api/rest/v1", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.status(200).json({ message: "Hare Krishna !!!" });
+  res.sendFile();
 });
 
 app.listen(port, () =>
