@@ -13,10 +13,11 @@ const tokenFactory = require("./security/token-factory");
 const bhagavadGitaDB = require("./db/bhagavad-gita-db");
 
 // first compile sass file to a css one
+const scssData = fs.readFileSync("./scss/index.scss", "utf8");
 const compiledCSS = sass.renderSync({
-  file: "scss/index.scss",
+  data: scssData,
 }); 
-fs.writeFileSync('./public/styles/index.css', compiledCSS.css);
+fs.writeFileSync("./public/styles/index.css", compiledCSS.css);
 
 const app = express();
 const port = process.env.PORT || constants.LOCALHOST_PORT;
