@@ -101,7 +101,7 @@ app.get("/api/rest/v1", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.sendFile();
+  res.sendFile("./public/index.html");
 });
 
 app.listen(port, () =>
