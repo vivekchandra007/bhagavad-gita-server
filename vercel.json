@@ -7,14 +7,9 @@
       }
   ],
   "routes": [
-      {
-          "src": "/(.*)",
-          "dest": "/"
-      }
-  ],
-  "functions": {
-    "index.js": {
-      "includeFiles": "scss/**"
+    {
+      "src": "/(.*)",
+      "dest": "/"
     }
-  }
+  ]
 }
