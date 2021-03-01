@@ -1,3 +1,5 @@
+const sass = require("sass");
+const fs = require("fs");
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const ObjectId = require("mongodb").ObjectID;
@@ -10,11 +12,20 @@ const tokenFactory = require("./security/token-factory");
 
 const bhagavadGitaDB = require("./db/bhagavad-gita-db");
 
+// first compile sass file to a css one
+const compiledCSS = sass.renderSync({
+  file: './scss/index.scss'
+}); 
+fs.writeFileSync('./public/styles/index.css', compiledCSS.css);
+
 const app = express();
 const port = process.env.PORT || constants.LOCALHOST_PORT;
 
-// No access without a valid access token (one received after calling calling /oauth2/v1/ route)
-app.use(require("./middlewares/auth"));
+// no access without a valid access token (one received after calling calling /oauth2/v1/ route)
+app.use("/api/", require("./middlewares/auth"));
+
+// serve static files from the 'public' folder
+app.use(express.static('./public'));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
