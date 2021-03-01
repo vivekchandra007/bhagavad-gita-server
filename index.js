@@ -1,6 +1,5 @@
 const sass = require("sass");
 const fs = require("fs");
-const { join } = require("path");
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const ObjectId = require("mongodb").ObjectID;
@@ -13,25 +12,13 @@ const tokenFactory = require("./security/token-factory");
 
 const bhagavadGitaDB = require("./db/bhagavad-gita-db");
 
-const glob = require("glob");
-
-var getDirectories = function (src, callback) {
-  glob(src + "**/*", callback);
-};
-getDirectories("*[!node_modules]", function (err, res) {
-  if (err) {
-    console.log("Error", err);
-  } else {
-    console.log(res);
-  }
-});
-
 // first compile sass file to a css one
-// const scssData = fs.readFileSync(join(__dirname, "scss", "index.scss"), "utf8");
-const compiledCSS = sass.renderSync({
-  file: join(__dirname, "scss", "index.scss"),
+fs.readFile("./scss/index.scss", "utf-8", (err, data) => {
+  const compiledCSS = sass.renderSync({
+    data: data,
+  });
+  fs.writeFileSync("./public/styles/index.css", compiledCSS.css);
 });
-fs.writeFileSync("./public/styles/index.css", compiledCSS.css);
 
 const app = express();
 const port = process.env.PORT || constants.LOCALHOST_PORT;
@@ -105,13 +92,6 @@ app.get("/api/rest/v1", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  getDirectories("*[!node_modules]", function (err, res) {
-    if (err) {
-      console.log("Error", err);
-    } else {
-      console.log(res);
-    }
-  });
   res.status(200).json({ message: "Hare Krishna !!!" });
 });
 
