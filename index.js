@@ -27,7 +27,9 @@ fs.readFile("./scss/index.scss", "utf-8", (err, data) => {
   const compiledCSS = sass.renderSync({
     data: data,
   });
-  fs.writeFileSync("./public/styles/index.css", compiledCSS.css);
+  fs.writeFile("./public/styles/index.css", compiledCSS.css, (err, data) => {
+    //do nothing;
+  });
 });
 
 const app = express();
