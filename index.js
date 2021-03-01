@@ -19,9 +19,15 @@ fs.readFile("./scss/index.scss", "utf-8", (err, data) => {
   });
   fs.writeFileSync("./public/styles/index.css", compiledCSS.css);
 });
-fs.readFile("./public/index.html");
-fs.readFile("./public/scripts/index.js");
-fs.readFile("./public/styles/index.css");
+fs.readFile("./public/index.html", (err, data) => {
+  //do nothing;
+});
+fs.readFile("./public/scripts/index.js", (err, data) => {
+  //do nothing;
+});
+fs.readFile("./public/styles/index.css", (err, data) => {
+  //do nothing;
+});
 
 const app = express();
 const port = process.env.PORT || constants.LOCALHOST_PORT;
