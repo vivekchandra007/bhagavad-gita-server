@@ -14,7 +14,7 @@ const bhagavadGitaDB = require("./db/bhagavad-gita-db");
 
 // first compile sass file to a css one
 const compiledCSS = sass.renderSync({
-  file: './scss/index.scss'
+  file: "scss/index.scss",
 }); 
 fs.writeFileSync('./public/styles/index.css', compiledCSS.css);
 
