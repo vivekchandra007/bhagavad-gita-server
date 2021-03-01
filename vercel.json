@@ -3,8 +3,7 @@
   "builds": [
       {
         "src": "./index.js",
-        "use": "@vercel/node",
-        "includeFiles": "scss/**"
+        "use": "@vercel/node"
       }
   ],
   "routes": [
@@ -12,5 +11,10 @@
       "src": "/(.*)",
       "dest": "/"
     }
-  ]
+  ],
+  "functions": {
+    "index.js": {
+      "includeFiles": "scss/**"
+    }
+  }
 }
