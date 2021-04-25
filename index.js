@@ -1,6 +1,6 @@
 const sass = require("sass");
-const { readFileSync } = require("fs");
 const { join } = require("path");
+const fs = require("fs");
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const ObjectId = require("mongodb").ObjectID;
@@ -12,6 +12,7 @@ const messages = require("./common/messages");
 const tokenFactory = require("./security/token-factory");
 
 const bhagavadGitaDB = require("./db/bhagavad-gita-db");
+const { fstat } = require("fs");
 
 const app = express();
 const port = process.env.PORT || constants.LOCALHOST_PORT;
@@ -88,7 +89,6 @@ app.get("/", (req, res) => {
   res.sendFile(join(__dirname, "public", "index.html"));
 });
 
-
 // first compile sass file to a css one
 // fs.readFile("./scss/index.scss", "utf-8", (err, data) => {
 //   const compiledCSS = sass.renderSync({
@@ -98,11 +98,25 @@ app.get("/", (req, res) => {
 //     //do nothing;
 //   });
 // });
+const inputSCSSFile = join(__dirname, "scss", "index.scss");
+const outputCSSFile = join(__dirname, "public", "styles", "index.css");
+// sass.renderSync(
+//   {
+//     file: inputSCSSFile,
+//     outFile: outputCSSFile,
+//     outputStyle: "compressed", //compressed | nested | expanded | compact
+//   },
+//   function (err, result) {
+//     if (!err) {
+//       console.log("scss render completed");
+//     }
+//   }
+// );
 
-sass.renderSync({
-  file: join(__dirname, "scss", "index.scss"),
-  outFile: join(__dirname, "public", "styles", "index.css"),
+var result = sass.renderSync({
+  file: inputSCSSFile,
 });
+fs.writeFileSync(outputCSSFile, result.css);
 
 // start server and listen on specified port (default 3000)
 app.listen(port, () =>
