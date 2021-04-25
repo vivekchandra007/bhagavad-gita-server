@@ -91,34 +91,10 @@ app.get("/", (req, res) => {
 
 app.get("/styles/index.css", (req, res) => {
   var result = sass.renderSync({
-    file: inputSCSSFile,
+    file: join(__dirname, "scss", "index.scss"),
   });
   res.type("css").send(result.css.toString());
 });
-
-// first compile sass file to a css one
-// fs.readFile("./scss/index.scss", "utf-8", (err, data) => {
-//   const compiledCSS = sass.renderSync({
-//     data: data,
-//   });
-//   fs.writeFile("./public/styles/index.css", compiledCSS.css, (err, data) => {
-//     //do nothing;
-//   });
-// });
-const inputSCSSFile = join(__dirname, "scss", "index.scss");
-const outputCSSFile = join(__dirname, "public", "styles", "index.css");
-// sass.renderSync(
-//   {
-//     file: inputSCSSFile,
-//     outFile: outputCSSFile,
-//     outputStyle: "compressed", //compressed | nested | expanded | compact
-//   },
-//   function (err, result) {
-//     if (!err) {
-//       console.log("scss render completed");
-//     }
-//   }
-// );
 
 // start server and listen on specified port (default 3000)
 app.listen(port, () =>
