@@ -1,5 +1,5 @@
 const sass = require("sass");
-const fs = require("fs");
+const { readFileSync } = require("fs");
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const ObjectId = require("mongodb").ObjectID;
@@ -11,26 +11,6 @@ const messages = require("./common/messages");
 const tokenFactory = require("./security/token-factory");
 
 const bhagavadGitaDB = require("./db/bhagavad-gita-db");
-
-fs.readFile("./public/index.html", (err, data) => {
-  //do nothing;
-});
-fs.readFile("./public/scripts/index.js", (err, data) => {
-  //do nothing;
-});
-fs.readFile("./public/styles/index.css", (err, data) => {
-  //do nothing;
-});
-
-// first compile sass file to a css one
-fs.readFile("./scss/index.scss", "utf-8", (err, data) => {
-  const compiledCSS = sass.renderSync({
-    data: data,
-  });
-  fs.writeFile("./public/styles/index.css", compiledCSS.css, (err, data) => {
-    //do nothing;
-  });
-});
 
 const app = express();
 const port = process.env.PORT || constants.LOCALHOST_PORT;
@@ -107,6 +87,17 @@ app.get("/", (req, res) => {
   res.sendFile("./public/index.html");
 });
 
+// first compile sass file to a css one
+// fs.readFile("./scss/index.scss", "utf-8", (err, data) => {
+//   const compiledCSS = sass.renderSync({
+//     data: data,
+//   });
+//   fs.writeFile("./public/styles/index.css", compiledCSS.css, (err, data) => {
+//     //do nothing;
+//   });
+// });
+
+// start server and listen on specified port (default 3000)
 app.listen(port, () =>
   console.log(`Server running on ${port}, http://localhost:${port}`)
 );
