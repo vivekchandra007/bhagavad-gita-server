@@ -3,5 +3,11 @@
     "api/index.js": {
       "includeFiles": "../public/**"
     }
-  }
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ]
 }
