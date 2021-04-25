@@ -77,6 +77,7 @@ app.use(
 );
 
 app.get("/api/rest/v1", (req, res) => {
+  console.log("Inside Rest API.");
   res.status(200).json({
     message:
       "This REST API works but we recommend using GraphQL one via /api/graphql/v1",
@@ -84,6 +85,7 @@ app.get("/api/rest/v1", (req, res) => {
 });
 
 app.get("/", (req, res) => {
+  console.log("Inside root i.e. /");
   res.sendFile("./public/index.html");
 });
 
