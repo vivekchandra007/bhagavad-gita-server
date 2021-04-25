@@ -20,7 +20,7 @@ const port = process.env.PORT || constants.LOCALHOST_PORT;
 app.use("/api/", require("./middlewares/auth"));
 
 // serve static files from the 'public' folder
-app.use(express.static("./public"));
+app.use(express.static(join(__dirname, "public")));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -89,6 +89,7 @@ app.get("/", (req, res) => {
   console.log("Inside root i.e. /");
   res.sendFile(join(__dirname, "public", "index.html"));
 });
+
 
 // first compile sass file to a css one
 // fs.readFile("./scss/index.scss", "utf-8", (err, data) => {
