@@ -7,8 +7,8 @@
     }
   ],
   "functions": {
-    "./index.js": {
-      "includeFiles": "public/index.html"
+    "api/index.js": {
+      "includeFiles": "../public/index.html"
     }
   }
 }

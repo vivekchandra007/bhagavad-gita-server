@@ -19,7 +19,7 @@ const port = process.env.PORT || constants.LOCALHOST_PORT;
 app.use("/api/", require("./middlewares/auth"));
 
 // serve static files from the 'public' folder
-app.use(express.static('./public'));
+app.use(express.static("./public"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
