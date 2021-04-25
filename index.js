@@ -1,5 +1,6 @@
 const sass = require("sass");
 const { readFileSync } = require("fs");
+const { join } = require("path");
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const ObjectId = require("mongodb").ObjectID;
@@ -86,7 +87,7 @@ app.get("/api/rest/v1", (req, res) => {
 
 app.get("/", (req, res) => {
   console.log("Inside root i.e. /");
-  res.sendFile("./public/index.html");
+  res.sendFile(join(__dirname, "public", "index.html"));
 });
 
 // first compile sass file to a css one
