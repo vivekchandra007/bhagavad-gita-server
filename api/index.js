@@ -3,20 +3,20 @@ const { readFileSync } = require("fs");
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const ObjectId = require("mongodb").ObjectID;
-const dbSchema = require("./schema/db-schema");
+const dbSchema = require("../schema/db-schema");
 
-const constants = require("./common/constants");
-const messages = require("./common/messages");
+const constants = require("../common/constants");
+const messages = require("../common/messages");
 
-const tokenFactory = require("./security/token-factory");
+const tokenFactory = require("../security/token-factory");
 
-const bhagavadGitaDB = require("./db/bhagavad-gita-db");
+const bhagavadGitaDB = require("../db/bhagavad-gita-db");
 
 const app = express();
 const port = process.env.PORT || constants.LOCALHOST_PORT;
 
 // no access without a valid access token (one received after calling calling /oauth2/v1/ route)
-app.use("/api/", require("./middlewares/auth"));
+app.use("/api/", require("../middlewares/auth"));
 
 // serve static files from the 'public' folder
 app.use(express.static("./public"));
