@@ -78,7 +78,6 @@ app.use(
 );
 
 app.get("/api/rest/v1", (req, res) => {
-  console.log("Inside Rest API.");
   res.status(200).json({
     message:
       "This REST API works but we recommend using GraphQL one via /api/graphql/v1",
@@ -86,7 +85,6 @@ app.get("/api/rest/v1", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  console.log("Inside root i.e. /");
   res.sendFile(join(__dirname, "public", "index.html"));
 });
 
@@ -100,6 +98,11 @@ app.get("/", (req, res) => {
 //     //do nothing;
 //   });
 // });
+
+sass.renderSync({
+  file: join(__dirname, "scss", "index.scss"),
+  outFile: join(__dirname, "public", "styles", "index.css"),
+});
 
 // start server and listen on specified port (default 3000)
 app.listen(port, () =>
