@@ -1,5 +1,13 @@
-body {
-    background-color: magenta;
+#app  {
+    padding: 8px;
+    text-align: center;
+    text-align: -webkit-center;
+    text-align: -moz-center;
+    text-align: -ms-center;
+    
+    .field {
+        max-width: 400px;
+    }
 }
 
 .stand-out {
