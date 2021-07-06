@@ -5,6 +5,8 @@ const messages = require("../common/messages");
 
 const tokenFactory = require("../security/token-factory");
 
+const { join } = require("path");
+
 module.exports = (req, res, next) => {
   if (req._parsedUrl.pathname === "/auth/oauth/v1/token") {
     // requesting token (through POST and https access only)
