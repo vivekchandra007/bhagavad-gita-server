@@ -28,10 +28,10 @@ module.exports = (req, res, next) => {
         req.token = token;
         next();
       } else {
-        res.status(401).setHeader("Location", "/notAuthorized.html").end();
+        res.status(301).setHeader("Location", "/notAuthorized.html").send();
       }
     } catch (error) {
-      res.status(401).setHeader("Location", "/notAuthorized.html").end();
+      res.status(301).setHeader("Location", "/notAuthorized.html").send();
     }
   }
 };
