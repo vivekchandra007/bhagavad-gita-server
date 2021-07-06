@@ -28,10 +28,10 @@ module.exports = (req, res, next) => {
         req.token = token;
         next();
       } else {
-        res.status(401).sendFile(join(__dirname, "public", "notAuthorized.html"));
+        res.status(401).sendFile("notAuthorized.html");
       }
     } catch (error) {
-      res.status(401).sendFile(join(__dirname, "public", "notAuthorized.html"));
+      res.status(401).sendFile("notAuthorized.html");
     }
   }
 };
